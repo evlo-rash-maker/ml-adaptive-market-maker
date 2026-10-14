@@ -1,0 +1,6 @@
+{
+  "risk_threshold": 0.45,
+  "direction_sensitivity": 4.0,
+  "risk_spread_sensitivity": 0.0,
+  "size_sensitivity": 0.25
+}

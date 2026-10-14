@@ -1,0 +1,21 @@
+simulation:
+  steps: 750
+  seeds: 10
+
+baseline:
+  base_half_spread: 2.0
+  volatility_sensitivity: 0.5
+  inventory_skew: 0.25
+  max_inventory: 25
+  quote_size: 5
+  informed_trader_share: 0.15
+
+experiments:
+  spread:
+    values: [1.0, 2.0, 3.0, 4.0, 6.0]
+
+  inventory_limit:
+    values: [5, 10, 20, 40, 80]
+
+  informed_share:
+    values: [0.00, 0.05, 0.15, 0.30, 0.50]
