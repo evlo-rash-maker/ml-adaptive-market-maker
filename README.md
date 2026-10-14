@@ -6,6 +6,24 @@ The project combines **market microstructure, simulation, supervised machine lea
 
 > **Final synthetic benchmark:** the ML-adaptive market maker achieved **19.4% higher mean P&L** and approximately **14% lower adverse-selection cost** than the traditional baseline across 12 unseen simulated markets.
 
+## Quick Demo
+
+After installing the project, run:
+
+```bash
+python scripts/run_demo.py
+```
+
+This runs one synthetic market using both the traditional and ML-adaptive market makers, displays the model's final inferred market state, and compares their execution results.
+
+A single simulation can favor either strategy. The final evaluation therefore uses a separate 12-market held-out benchmark rather than relying on one run.
+
+For the full benchmark:
+
+```bash
+python scripts/run_final_ai_benchmark.py
+```
+
 ---
 
 ## Overview
@@ -58,6 +76,7 @@ Adaptive Quotes
       |
       v
 P&L / Adverse Selection / Inventory
+```
 
 ---
 
@@ -132,7 +151,7 @@ Strategy parameters were selected using validation simulations before the final 
 
 ## Final Out-of-Sample Benchmark
 
-The final evaluation used **12 unseen synthetic markets** that were not used for strategy tuning.
+The final evaluation used **12 unseen synthetic markets** (seeds 100–111, 600 steps each) that were not used for model training or strategy tuning.
 
 | Metric | Traditional | ML Adaptive |
 |---|---:|---:|
@@ -208,6 +227,18 @@ tests/
 
 ---
 
+## Installation
+
+Requires Python 3.12 or newer. From the repository root:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev]"
+```
+
+---
+
 ## Testing
 
 The project passes **29 automated tests** covering the order book, market process, market maker, simulation, and accounting system.
@@ -220,12 +251,14 @@ python -m pytest -q
 
 ## Reproducing the Final Benchmark
 
+The trained model (`results/models/directional_flow_model.joblib`) and tuned strategy parameters (`results/models/directional_strategy.json`) are included, so the benchmark can be rerun without retraining:
+
 ```bash
 python scripts/run_final_ai_benchmark.py
 python scripts/make_final_figures.py
 ```
 
-The final benchmark results are stored in:
+The benchmark uses fixed seeds, so it reproduces the table above. Results are written to:
 
 ```text
 results/tables/final_directional_ai_benchmark.csv
@@ -255,3 +288,9 @@ The purpose of the project is to explore how machine learning can interact with 
 - SortedContainers
 - joblib
 - pytest
+
+---
+
+## License
+
+Released under the [MIT License](LICENSE).
